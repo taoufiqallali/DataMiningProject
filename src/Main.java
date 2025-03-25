@@ -8,7 +8,8 @@ public class Main {
         System.out.println("enter k:");
         int k = scanner.nextInt();
         KNN knn = new KNN(k);
-        knn.loadDataset("C:\\Users\\Taoufiq\\Desktop\\m2i\\JEE\\TDClassroom\\dataMining\\src\\iris.txt");
+        System.out.println(System.getProperty("user.dir"));
+        knn.loadDataset("./src/iris.txt");
 
         System.out.println("Enter values:");
             double[] input = new double[4]; // Adjust for dataset features
