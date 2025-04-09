@@ -2,10 +2,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.Random;
 
 public class KNN {
 
     private List<DataPoint> dataSet = new ArrayList<>();
+    private List<DataPoint> TrainSet = new ArrayList<>();
+    private List<DataPoint> TestSet = new ArrayList<>();
     private int k;
 
     public KNN (int k ){
@@ -25,6 +28,17 @@ public class KNN {
             dataSet.add(new DataPoint(features, label));
         }
         br.close();
+
+        Random rand = new Random(67);
+        int i;
+        for(i=0;i<dataSet.size();i++){
+
+        if(rand.nextInt(10) > 7){TestSet.add(dataSet.get(i));}
+        else{TrainSet.add(dataSet.get(i));}
+        }
+       System.out.println(TestSet.size());
+        System.out.println(TrainSet.size());
+
     }
 
     private double euclideanDistance(double[] a, double[] b) {
@@ -37,7 +51,7 @@ public class KNN {
 
     public String classify(double[] input){
         PriorityQueue<DataPoint> neighbors = new PriorityQueue<>(Comparator.comparingDouble(db -> euclideanDistance(db.getFeatures(), input)));
-        neighbors.addAll(dataSet);
+        neighbors.addAll(TrainSet);
 
         Map<String, Integer> votes = new HashMap<>();
         for(int i = 0; i < k; i++){
@@ -45,5 +59,42 @@ public class KNN {
             votes.put(neighbor.getLabel(), votes.getOrDefault(neighbor.getLabel(), 0) + 1);
         }
         return Collections.max(votes.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+
+    public void test(){
+        int[][] matrix  =new int[3][3];
+        String[] classes= {"Iris-setosa","Iris-versicolor","Iris-virginica"};
+        int i,real,pred;
+
+
+
+        for(i=0;i<TestSet.size();i++){
+            real=findIndex(TestSet.get(i).getLabel());
+            System.out.println(classify(TestSet.get(i).getFeatures()));
+            pred=findIndex(classify(TestSet.get(i).getFeatures()));
+            matrix[real][pred]++;
+
+        }
+
+
+        for (i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println(); // new line after each row
+        }
+
+    }
+    public int findIndex(String name){
+        switch(name){
+            case "Iris-setosa":
+                return 0;
+            case "Iris-versicolor":
+                return 1;
+            case "Iris-virginica":
+                return 2;
+        }
+        return 3;
+
     }
 }

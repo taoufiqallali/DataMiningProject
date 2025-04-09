@@ -14,6 +14,8 @@ public class Main {
         // Load the dataset from the specified path (iris.txt)
         knn.loadDataset("./src/iris.txt");
 
+        // dispaly test results
+        knn.test();
         // Prompt the user to input values for classification
         System.out.println("Enter values:");
 
