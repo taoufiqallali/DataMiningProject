@@ -36,7 +36,9 @@ public class KNN {
         if(rand.nextInt(10) > 7){TestSet.add(dataSet.get(i));}
         else{TrainSet.add(dataSet.get(i));}
         }
-       System.out.println(TestSet.size());
+        System.out.println("test size");
+        System.out.println(TestSet.size());
+        System.out.println("training size");
         System.out.println(TrainSet.size());
 
     }
@@ -66,11 +68,11 @@ public class KNN {
         String[] classes= {"Iris-setosa","Iris-versicolor","Iris-virginica"};
         int i,real,pred;
 
-
+        System.out.println("confusion matrix");
+        System.out.println();
 
         for(i=0;i<TestSet.size();i++){
             real=findIndex(TestSet.get(i).getLabel());
-            System.out.println(classify(TestSet.get(i).getFeatures()));
             pred=findIndex(classify(TestSet.get(i).getFeatures()));
             matrix[real][pred]++;
 
@@ -83,7 +85,7 @@ public class KNN {
             }
             System.out.println(); // new line after each row
         }
-
+        System.out.println();
     }
     public int findIndex(String name){
         switch(name){

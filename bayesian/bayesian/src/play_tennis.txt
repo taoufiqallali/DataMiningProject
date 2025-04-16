@@ -1,0 +1,15 @@
+Ensoleillement,Température,Humidité,Vent,Jouer
+couvert,chaud,haute,non,oui
+pluie,bon,haute,non,oui
+pluie,frais,normale,non,oui
+couvert,frais,normale,oui,oui
+soleil,frais,normale,non,oui
+pluie,bon,normale,non,oui
+soleil,bon,normale,oui,oui
+couvert,bon,haute,oui,oui
+couvert,chaud,normale,non,oui
+soleil,chaud,haute,non,non
+soleil,chaud,haute,oui,non
+pluie,frais,normale,oui,non
+soleil,bon,haute,non,non
+pluie,bon,haute,oui,non
